@@ -1,0 +1,13 @@
+{
+    "domain": "http://localhost:8080/",
+    "cases": {
+        "DV_01": {
+            "picture_form_input": "form_1.png",
+            "message": "Your username is invalid!",
+            "infor_acc": {
+                "username": "admin",
+                "password": "admin"
+            }
+        }
+    }
+}

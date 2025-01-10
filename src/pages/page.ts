@@ -84,14 +84,28 @@ export class SFPage {
     }
 
     /**
+* Wait for button is visible
+* @param labelName
+* @param index
+*/
+    async checkButtonVisible(labelName: string, index = 1): Promise<boolean> {
+        return await this.page
+            .locator(`(//button[normalize-space()='${labelName}'])[${index}]`).isVisible({ timeout: 5000 });
+    }
+
+
+    /**
  * Wait for button is visible
  * @param labelName
  * @param index
  */
-    async checkButtonVisible(labelName: string, index = 1): Promise<boolean> {
-        await this.page.waitForTimeout(3000);
-        return await this.page
-            .locator(`(//button[normalize-space()='${labelName}'])[${index}]`).isVisible({ timeout: 5000 });
+    async clickOptionVisible(labelName: string, index = 1) {
+        const isOptionVisiblae = await this.page
+            .locator(`(//li[normalize-space()='${labelName}'])[${index}]`).isVisible({ timeout: 5000 });
+        if (isOptionVisiblae) {
+            await this.page.locator(`(//li[normalize-space()='${labelName}'])[${index}]//a`).click();
+        }
+
     }
 
     /**

@@ -2,7 +2,8 @@ import { Page } from "@playwright/test";
 import { SFPage } from "@pages/page";
 import { Login } from "@types"
 export class LoginPage extends SFPage {
-    xpathEinvoice = "//section[@id='einvoice-container']";
+    xpathMessageError = "//div[@id='flash-messages']//div[@id='flash']";
+    xpathLogin = "//div[@id='content']";
     constructor(page: Page, domain: string) {
         super(page, domain);
     }
@@ -12,23 +13,17 @@ export class LoginPage extends SFPage {
      * @param infoLogin : infor login include email, pass
      */
     async inputForm(infoLogin: Login) {
-        if (infoLogin.email) {
-            await this.page.locator("//input[@name='companyUsername']").fill(infoLogin.email);
+        if (infoLogin.username) {
+            await this.page.locator("//input[@id='username']").fill(infoLogin.username);
         }
         if (infoLogin.password) {
-            await this.page.locator("//input[@name='password']").fill(infoLogin.password);
-        }
-        if (infoLogin.MST) {
-            await this.page.locator("//input[@name='taxCode']").fill(infoLogin.MST);
+            await this.page.locator("//input[@id='password']").fill(infoLogin.password);
         }
     }
-
     async loginDashboard(infoLogin: Login) {
         await this.inputForm(infoLogin);
-        await this.checkButtonVisible("Đăng nhập");
-        await this.clickButtonByName("Đăng nhập");
-        await this.page.waitForSelector(this.xpathMessage);
-        await this.page.waitForSelector(this.xpathMessage, { state: "hidden" });
+        await this.checkButtonVisible("Login");
+        await this.clickButtonByName("Login");
+        await this.page.waitForLoadState("load");
     }
-
 }
