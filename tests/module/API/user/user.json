@@ -1,0 +1,68 @@
+{
+    "domain": "http://localhost:3000",
+    "cases": {
+        "TC_01": {
+            "users": [
+                {
+                    "title": "Missing fields",
+                    "user_infor": {
+                        "id": "2",
+                        "username": "",
+                        "email": "",
+                        "password": ""
+                    },
+                    "message": "",
+                    "status_code": 400
+                },
+                {
+                    "title": "email invalid",
+                    "user_infor": {
+                        "id": "3",
+                        "username": "john_doe",
+                        "email": "abc",
+                        "password": "hashed_password_here"
+                    },
+                    "message": "",
+                    "status_code": 400
+                },
+                {
+                    "title": "User already exists",
+                    "user_infor": {
+                        "id": "4",
+                        "username": "john_doe",
+                        "email": "abc",
+                        "password": "hashed_password_here"
+                    },
+                    "message": "",
+                    "status_code": 400
+                },
+                {
+                    "title": "Empty request body",
+                    "user_infor": {},
+                    "message": "",
+                    "status_code": 400
+                },
+                {
+                    "title": "Invalid HTTP method",
+                    "method": "get",
+                    "user_infor": {
+                        "id": "6",
+                        "username": "john_doe",
+                        "email": "abc",
+                        "password": "hashed_password_here"
+                    },
+                    "message": "",
+                    "status_code": 400
+                }
+            ]
+        },
+        "TC_02": {
+            "users_infor": {
+                "username": "john_doe",
+                "email": "john@example.com",
+                "password": "hashed_password_here"
+            },
+            "status": 201
+        }
+    }
+}
